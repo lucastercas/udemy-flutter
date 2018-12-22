@@ -1,9 +1,60 @@
 import 'package:flutter/material.dart';
 import 'category.dart';
+import 'unit.dart';
 
-const _categoryIcon = Icons.cake;
+final  _backgroundColor = Colors.green[100];
 
-createCategories() {
+class CategoryRoute extends StatefulWidget {
+  const CategoryRoute();
+
+  @override
+  _CategoryRouteState createState() => _CategoryRouteState();
+}
+
+class _CategoryRouteState extends State<CategoryRoute> {
+  var _categories = <Category>[];
+
+  @override
+  void initState() {
+    super.initState();
+    _categories = createCategories();
+  }  
+
+  Widget _buildWidgets(List<Widget> categories) {
+    return ListView.builder(
+      itemBuilder: (BuildContext context, int index) => _categories[index],
+      itemCount: categories.length,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final listView = Container(
+      color: _backgroundColor,
+      padding: EdgeInsets.symmetric(horizontal: 8.0),
+      child: _buildWidgets(createCategories())
+    );
+
+    final appBar = AppBar(
+      elevation: 0.0,
+      title: Text(
+        "Categories Screen",
+        style: TextStyle(
+          color: Colors.black
+        )
+      ),
+      centerTitle: true,
+    );
+
+    return Scaffold(
+      appBar: appBar,
+      body: listView,
+    );
+  }
+}
+
+
+List<Widget> createCategories() {
   const _categoryNames = <String>[
     'Tamanho',
     'Área',
@@ -32,45 +83,22 @@ createCategories() {
       new Category(
         name: _categoryNames[i],
         color: _baseColors[i],
-        iconLocation: _categoryIcon,
+        iconLocation: Icons.cake,
+        units: getUnitList(_categoryNames[i])
       )
     );
   }
   return widgetsList;
 }
 
-class CategoryRoute extends StatelessWidget {
-  const CategoryRoute();
-
-  Widget _buildWidgets(List<Widget> categories) {
-    return ListView.builder(
-      itemBuilder: (BuildContext context, int index) => categories[index],
-      itemCount: categories.length,
+List<Unit> getUnitList(String category) {
+  return List.generate(10, (int i) {
+    i += 1;
+    return Unit(
+      name: '$category Unit $i',
+      conversion: i.toDouble(),
     );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-
-    final listView = Container(
-      padding: EdgeInsets.symmetric(horizontal: 8.0),
-      child: _buildWidgets(createCategories())
-    );
-
-    final appBar = AppBar(
-      elevation: 0.0,
-      title: Text(
-        "Categories Screen",
-        style: TextStyle(
-          color: Colors.black
-        )
-      ),
-      centerTitle: true,
-    );
-
-    return Scaffold(
-      appBar: appBar,
-      body: listView,
-    );
-  }
+  });
 }
+
+
