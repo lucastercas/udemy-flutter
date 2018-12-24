@@ -7,20 +7,17 @@ class ConverterRouter extends StatefulWidget {
   final Color color;
   final List<Unit> units;
 
-  const ConverterRouter({
-    @required this.name,
-    @required this.color,
-    @required this.units
-  }) : assert(name != null),
-  assert(color != null),
-  assert(units != null);
+  const ConverterRouter(
+      {@required this.name, @required this.color, @required this.units})
+      : assert(name != null),
+        assert(color != null),
+        assert(units != null);
 
   @override
   _ConverterRouteState createState() => _ConverterRouteState();
 }
 
 class _ConverterRouteState extends State<ConverterRouter> {
-
   @override
   Widget build(BuildContext context) {
     final unitWidgets = widget.units.map((Unit unit) {
@@ -33,17 +30,13 @@ class _ConverterRouteState extends State<ConverterRouter> {
               unit.name,
               style: Theme.of(context).textTheme.headline,
             ),
-            Text(
-              'Conversion: ${unit.conversion}',
-              style: Theme.of(context).textTheme.subhead
-            )
+            Text('Conversion: ${unit.conversion}',
+                style: Theme.of(context).textTheme.subhead)
           ],
-        )
+        ),
       );
     }).toList();
 
-    return ListView(
-      children: unitWidgets
-    );
+    return ListView(children: unitWidgets);
   }
 }

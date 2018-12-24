@@ -6,14 +6,13 @@ void main() {
 }
 
 class UnitConverterApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Conversor de Unidades',
       home: Container(
-        child: CategoryRoute()
+        child: CategoryRoute(),
       ),
     );
   }

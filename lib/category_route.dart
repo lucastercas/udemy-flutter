@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'category.dart';
 import 'unit.dart';
 
-final  _backgroundColor = Colors.green[100];
+final _backgroundColor = Colors.green[100];
 
 class CategoryRoute extends StatefulWidget {
   const CategoryRoute();
@@ -18,7 +18,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
   void initState() {
     super.initState();
     _categories = createCategories();
-  }  
+  }
 
   Widget _buildWidgets(List<Widget> categories) {
     return ListView.builder(
@@ -30,18 +30,15 @@ class _CategoryRouteState extends State<CategoryRoute> {
   @override
   Widget build(BuildContext context) {
     final listView = Container(
-      color: _backgroundColor,
-      padding: EdgeInsets.symmetric(horizontal: 8.0),
-      child: _buildWidgets(createCategories())
-    );
+        color: _backgroundColor,
+        padding: EdgeInsets.symmetric(horizontal: 8.0),
+        child: _buildWidgets(createCategories()));
 
     final appBar = AppBar(
       elevation: 0.0,
       title: Text(
         "Categories Screen",
-        style: TextStyle(
-          color: Colors.black
-        )
+        style: TextStyle(color: Colors.black),
       ),
       centerTitle: true,
     );
@@ -52,7 +49,6 @@ class _CategoryRouteState extends State<CategoryRoute> {
     );
   }
 }
-
 
 List<Widget> createCategories() {
   const _categoryNames = <String>[
@@ -78,14 +74,14 @@ List<Widget> createCategories() {
   ];
 
   var widgetsList = <Category>[];
-  for(var i = 0; i < _categoryNames.length; i++) {
+  for (var i = 0; i < _categoryNames.length; i++) {
     widgetsList.add(
       new Category(
         name: _categoryNames[i],
         color: _baseColors[i],
         iconLocation: Icons.cake,
-        units: getUnitList(_categoryNames[i])
-      )
+        units: getUnitList(_categoryNames[i]),
+      ),
     );
   }
   return widgetsList;
@@ -100,5 +96,3 @@ List<Unit> getUnitList(String category) {
     );
   });
 }
-
-

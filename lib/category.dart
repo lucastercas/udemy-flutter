@@ -12,35 +12,30 @@ class Category extends StatelessWidget {
   final IconData iconLocation;
   final List<Unit> units;
 
-  const Category({
-    Key key,
-    @required this.name,
-    @required this.color,
-    @required this.iconLocation,
-    @required this.units
-  }) : assert(name != null), 
-    assert(color != null), 
-    assert(iconLocation != null),
-    assert(units != null),
-    super(key: key);
+  const Category(
+      {Key key,
+      @required this.name,
+      @required this.color,
+      @required this.iconLocation,
+      @required this.units})
+      : assert(name != null),
+        assert(color != null),
+        assert(iconLocation != null),
+        assert(units != null),
+        super(key: key);
 
   void _navigateToConverter(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute<void>(
-      builder: (BuildContext context) {
-        return Scaffold(
-          appBar: AppBar(
-            title: Text(
-              this.name
-            )
-          ),
-          body: ConverterRouter(
-            color: color,
-            name: name,
-            units: units
-          ) 
-        );
-      }
-    ));
+    Navigator.push(
+      context,
+      MaterialPageRoute<void>(
+        builder: (BuildContext context) {
+          return Scaffold(
+            appBar: AppBar(title: Text(this.name)),
+            body: ConverterRouter(color: color, name: name, units: units),
+          );
+        },
+      ),
+    );
   }
 
   @override
@@ -53,7 +48,7 @@ class Category extends StatelessWidget {
           borderRadius: _borderRadius,
           highlightColor: color,
           splashColor: color,
-          onTap: () =>_navigateToConverter(context),
+          onTap: () => _navigateToConverter(context),
           child: Padding(
             padding: EdgeInsets.all(8.0),
             child: Row(
@@ -61,24 +56,20 @@ class Category extends StatelessWidget {
               children: <Widget>[
                 Padding(
                   padding: EdgeInsets.all(16.0),
-                  child: Icon(
-                    iconLocation,
-                    size: 45.0
-                  )
+                  child: Icon(iconLocation, size: 45.0),
                 ),
                 Center(
                   child: Text(
                     name,
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.headline
+                    style: Theme.of(context).textTheme.headline,
                   ),
                 )
               ],
-            )
-          )
-        )
-      )
+            ),
+          ),
+        ),
+      ),
     );
-
   }
 }
